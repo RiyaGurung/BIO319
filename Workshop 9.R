@@ -45,12 +45,18 @@ penguins %>% filter(species == 'Adelie') %>% ggplot(aes(x = body_mass_g, y = fli
 
 #the species has to be filtered again in geom_text, because otherwise it will include all the species of penguins that have a flipper length of >200 and add labels for them too 
 
+#3 - Facets
 
+malariamodel<- read.table('wmr_modelling.txt', sep = '\t', header = T)
 
+df_short <- head(malariamodel, n = 506L)
+#subsetted to 506 rows (slightly more than half of the original data)
 
+df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths)) + geom_col(fill = 'firebrick') + facet_wrap(~country, ncol = 5, dir = 'v')
 
-
-
+#NAs were dropped and only data from 2019-2021 was included 
+#facet_wrap created a graph for each country looking at the number of deaths in each year 
+# ~ decides the variable by which we want to split our data , ncol allows us to choose the number of columns, dir controls the direction of the wrap - in this case vertical (horizontal is the default)
 
 
 
