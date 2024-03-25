@@ -39,6 +39,18 @@ penguins %>% filter(species == "Gentoo") %>%
 #3) We’ve made the x-axis a bit longer with xlim(), so that the names don’t get cut off.
 
 
+#To highlight the home islands of Adelie penguins with flipper lengths over 200mm, we can filter within the 'data' argument of geom_text:
+
+penguins %>% filter(species == 'Adelie') %>% ggplot(aes(x = body_mass_g, y = flipper_length_mm)) + geom_point() + geom_text(data = filter(penguins, species == 'Adelie' ,flipper_length_mm > 200), aes(label = island), nudge_y = -0.7)
+
+#the species has to be filtered again in geom_text, because otherwise it will include all the species of penguins that have a flipper length of >200 and add labels for them too 
+
+
+
+
+
+
+
 
 
 
