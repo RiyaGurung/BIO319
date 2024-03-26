@@ -59,4 +59,11 @@ df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths
 # ~ decides the variable by which we want to split our data , ncol allows us to choose the number of columns, dir controls the direction of the wrap - in this case vertical (horizontal is the default)
 
 
+df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths)) + geom_col(fill = 'firebrick') + facet_wrap(~country, ncol = 5, dir = 'v', scales = 'free_x')
+
+# what does as.table do?
+#scales = 'free' - for each graph, the y and x axis are 'freed' meaning their scales are all different depending on what their highest is 
+
+
+
 
