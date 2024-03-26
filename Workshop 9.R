@@ -59,10 +59,21 @@ df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths
 # ~ decides the variable by which we want to split our data , ncol allows us to choose the number of columns, dir controls the direction of the wrap - in this case vertical (horizontal is the default)
 
 
-df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths)) + geom_col(fill = 'firebrick') + facet_wrap(~country, ncol = 5, dir = 'v', scales = 'free_x')
+df_short %>% drop_na() %>% filter(year>2018) %>% ggplot(aes(x = year, y = deaths)) + geom_col(fill = 'firebrick') + facet_wrap(~reorder(country, deaths), ncol = 5, dir = 'v', scales = 'free_x')
 
-# what does as.table do?
+# what does as.table do? - it is meant to move the separate graphs in terms of highest value but it didn't work so I used reorder
 #scales = 'free' - for each graph, the y and x axis are 'freed' meaning their scales are all different depending on what their highest is 
+
+penguins %>% drop_na() %>% ggplot(aes(x = bill_depth_mm, y = bill_length_mm)) + geom_point() + facet_grid(sex ~ species)
+#facet_grid separates 2 variables by 2 categorical values - in this case it is sex and species
+#sex being the row headers and species being the column headers 
+
+p_plot <- penguins %>% drop_na() %>%
+  ggplot(aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point()
+
+p_plot + facet_grid(. ~ species)
+#this way we can control how we want the plots separated by just one variable (species)
 
 
 
